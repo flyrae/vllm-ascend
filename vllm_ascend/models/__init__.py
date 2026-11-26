@@ -106,6 +106,16 @@ def register_model():
         "Qwen3_5MoeForConditionalGeneration",
         "vllm_ascend.models.qwen3_5_vl:AscendQwen3_5MoeForConditionalGeneration",
     )
+    # Inkling 2 Mini (looped checkpoint): NPU layers in place of the upstream
+    # CUDA/Triton kernels, see vllm_ascend/models/inkling2/. Import the package
+    # first so its config registration takes effect before ModelConfig resolves
+    # the model type.
+    import vllm_ascend.models.inkling2  # noqa: F401
+
+    ModelRegistry.register_model(
+        "Inkling2LoopForConditionalGeneration",
+        "vllm_ascend.models.inkling2.model:AscendInkling2LoopForConditionalGeneration",
+    )
     ModelRegistry.register_model(
         "D3ForSequenceClassification",
         "vllm_ascend.models.d3:AscendD3ForSequenceClassification",

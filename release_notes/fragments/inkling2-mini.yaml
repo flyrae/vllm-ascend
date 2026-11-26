@@ -1,0 +1,8 @@
+# Release note fragment for the Inkling 2 Mini NPU port.
+# Replace `pr: 0` with the actual PR number before merging.
+pr: 0
+entries:
+  - category: feature
+    text: Added experimental Ascend NPU support for Inkling 2 Mini (looped checkpoint). The model loads the released NVFP4/MXFP8 checkpoint with BF16 experts and generates text on a single Atlas A2 64 GB NPU, both through the vLLM v0.34.0 engine (paged KV/conv-state caches, CANN attention and grouped MoE) and through an explicit engine-free cache. Prefill, decode, chunked prefill and multi-request batches were validated, eagerly and with decode-only ACL graphs (cudagraph_mode=FULL_DECODE_ONLY on the uncompiled model). Images, LoRA, DSpark, TP/PP and graphs for prefill are not available yet.
+    model: Inkling-2-Mini
+    hardware: [A2]
